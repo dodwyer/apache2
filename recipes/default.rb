@@ -185,18 +185,9 @@ apache_conf 'ports' do
   conf_path node['apache']['dir']
 end
 
-<<<<<<< HEAD
-template "#{node['apache']['dir']}/sites-available/default.conf" do
-  source   'default-site.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  notifies :reload, 'service[apache2]'
-=======
 if node['apache']['version'] == '2.4' && !platform_family?('freebsd')
   # on freebsd the prefork mpm is staticly compiled in
   include_recipe "apache2::mpm_#{node['apache']['mpm']}"
->>>>>>> 40843bab1e8b8eadffc2b5cf8c8bac17e1ccde87
 end
 
 node['apache']['default_modules'].each do |mod|
